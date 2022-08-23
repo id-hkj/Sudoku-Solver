@@ -3,11 +3,7 @@
 This Sudoku-Solver does what the name presents - it solves sudokus.
 But it can do more than that. In version 3 onwards, it can check your progress in your own sudokus and see how many solutions it has!
 
-In version 5, a sudoku generator may be introduced as we start exploring sudoku spin-offs to add in (ex. 6x6 grid, diagonal sudoku...).
-
-Version 5 has just begun planning so it is still up in the air what I will aim for, but the spin-offs will probobly come in (the generator I'm not entirely sure about).
-
-VERSION 5
+VERSION 5 will:
 
 -Incorporates Tkinter GUI
 
@@ -25,11 +21,11 @@ VERSION 5
 
 -If input unsolveable board, will notify the user
 
--MAYBE Generate sudokus to solve
+-MAYBE Generate sudokus to solve IF V5 is made, this will be the only new feature. The others are not working out.
 
--PROBABLY Solve different sudoku spin offs
+-P̶R̶O̶B̶A̶B̶L̶Y̶ ̶S̶o̶l̶v̶e̶ ̶d̶i̶f̶f̶e̶r̶e̶n̶t̶ ̶s̶u̶d̶o̶k̶u̶ ̶s̶p̶i̶n̶ ̶o̶f̶f̶s The spin-offs are either making the grid bigger, smaller, substituting the numbers or have rules as such the grid will look completely different every time.
 
--UNLIKELY BUT POSSIBLE an update to the 'how many' algorithm to minimise the brute force search and give an acurrate number of solutions
+-U̶N̶L̶I̶K̶E̶L̶Y̶ ̶B̶U̶T̶ ̶P̶O̶S̶S̶I̶B̶L̶E̶ ̶a̶n̶ ̶u̶p̶d̶a̶t̶e̶ ̶t̶o̶ ̶t̶h̶e̶ ̶'̶h̶o̶w̶ ̶m̶a̶n̶y̶'̶ ̶a̶l̶g̶o̶r̶i̶t̶h̶m̶ ̶t̶o̶ ̶m̶i̶n̶i̶m̶i̶s̶e̶ ̶t̶h̶e̶ ̶b̶r̶u̶t̶e̶ ̶f̶o̶r̶c̶e̶ ̶s̶e̶a̶r̶c̶h̶ ̶a̶n̶d̶ ̶g̶i̶v̶e̶ ̶a̶n̶ ̶a̶c̶u̶r̶r̶a̶t̶e̶ ̶n̶u̶m̶b̶e̶r̶ ̶o̶f̶ ̶s̶o̶l̶u̶t̶i̶o̶n̶s I just can not figure out how to minimise the brute force search.
 
 .
 
