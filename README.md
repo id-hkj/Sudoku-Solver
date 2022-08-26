@@ -87,7 +87,7 @@ VERSION 1
 
 -Solves Sudokus
 
--Input like 3,.,.,.,.,9,6,4,.
+-Input like 3,x,x,x,x,9,6,4,x
 
 -If input board incorrectly, will give error.
 
