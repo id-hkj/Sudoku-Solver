@@ -29,7 +29,6 @@ def Check(Row, Column, Val):
             if k == Column:
                 pass
             else:
-                print('Row FAILED')
                 return False
     
     #COLUMN
@@ -178,3 +177,5 @@ for i in range (9):
     Row = Board1[i]
     Row = str(str(Row[0]) + str(Row[1]) + str(Row[2]) + str(Row[3]) + str(Row[4]) + str(Row[5]) + str(Row[6]) + str(Row[7]) + str(Row[8]))
     print(Row)
+    
+x = input('\nPress Enter/Return to close')
