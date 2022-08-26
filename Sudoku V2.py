@@ -108,3 +108,5 @@ for i in range (9):
 print('\nThis solve took ' + str(round(((end_time - start_time) * 1000), 0)) + ' milliseconds.')
 print('This solve increased numbers ' + str(increase) + ' times')
 print('This solve backtracked ' + str(backtrack) + ' times.')
+
+x = input('\nPress Enter/Return to close')
