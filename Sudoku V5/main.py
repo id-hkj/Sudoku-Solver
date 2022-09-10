@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-from turtle import width
 from Functions import Solve, Mark
 from time import time
 import re
@@ -28,7 +27,6 @@ def topset():
     custom.destroy()
 
 def resetB():
-    print(howm)
     for i in range(9):
         for j in range(9):
             board[i][j].set('')
@@ -157,6 +155,7 @@ def howmny():
     val_2.set(str(back))
     val_3.set(str(inc))
     message.config(foreground="green")
+    per('strt')
     if num == howm:
         val_5.set('The current board has\n' + str(num) + ' or more solutions.')
     else:
@@ -252,7 +251,6 @@ def per(peram):
                 HowDisp.set(str(now - 1))
                 displayinit(soclose(int(now - 2)))
         else:
-            print(peram)
             displayinit(soclose(int(int(peram) - 1)))
 def help():
     global numm
