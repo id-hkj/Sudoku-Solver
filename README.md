@@ -27,7 +27,7 @@ VERSION 5 will:
 
 -**NEW** You can now see all the iterations the board goes through in when you run 'How Many Solutions'
 
--**NEW** We fixd... A spelling error!
+-**NEW** We fixed... A spelling error!
 
 .
 
