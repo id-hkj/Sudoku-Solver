@@ -225,6 +225,13 @@ def soclose(gimme):
     res = asols[gimme].strip('][').split('], [')
     for i in range(9):
         res[i] = res[i].split(', ')
+    for i in range(9):
+        for j in range(9):
+            try:
+                neww = res[i][j].split("'")
+                res[i][j] = neww[1]
+            except:
+                pass
     return res
 
 def per(peram):
