@@ -8,6 +8,7 @@ asols = []
 root = Tk()
 root.title('Sudoku')
 root.geometry('970x300-500+250')
+root.resizable(FALSE,FALSE)
 
 board = [[StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar()],
     [StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar()],
