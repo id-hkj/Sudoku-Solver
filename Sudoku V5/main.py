@@ -191,6 +191,7 @@ def HowMany(Boards):
             if Board[i][j] == '0':
                 Change_Squares.append(str(i) + str(j))
     global howm
+    howm = int(howm)
     works = True
     num=0
     back=0
