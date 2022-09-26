@@ -212,7 +212,7 @@ def HowMany(Boards):
             global asols
             asols.append(str(Board))
             if int(p['value']) < 950:
-                p['value'] = 5 + round(num/(round(howm/1000) + 1))
+                p['value'] = 5 + round(num/(round(int(howm)/1000) + 1))
                 new.update()
         if num == howm:
             works = False
@@ -220,7 +220,14 @@ def HowMany(Boards):
     return num,back,inc
 
 def only_numbers(char):
-    return re.match('^[1-9]*$', char) is not None and len(char) <= 1
+    if (re.match('^[1-9]*$', char) is not None and len(char) <= 1):
+        if not(len(char) == 0):
+            tab(7)
+        return True
+    elif char=='0':
+        tab(4)
+    else:
+        return False
 
 def tick(char):
     return re.match('^[0-9]*$', char) is not None and len(char) < 7
