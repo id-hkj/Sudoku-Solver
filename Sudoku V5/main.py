@@ -21,11 +21,32 @@ board = [[StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(
     [StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar()]]
 
 Answer = [[],[],[],[],[],[],[],[],[]]
+user = [[],[],[],[],[],[],[],[],[]]
 howm = 5000
 def topset():
     global howm
-    howm = round(float(numm.get()))
+    if numm.get() == '' or int(numm.get()) == 0:
+        howm = 5000
+    else:
+        howm = numm.get()
     custom.destroy()
+
+def save():
+    check = Toplevel()
+    check.geometry('250x50+'+str(root.winfo_rootx()+300)+'+'+str(root.winfo_rooty()+50))
+    framez = Frame(check)
+    framez.grid(column=0,row=0)
+    def No():
+        check.destroy()
+    def Yes():
+        with open(path.join(path.dirname(path.abspath(__file__)), "board.txt"), 'w') as f:
+            f.write(str(Solveinit(board)))
+        root.destroy()
+    ttk.Label(framez,text='Are you sure you want to close this program?').grid(row=1,column=0)
+    new=Frame(framez)
+    new.grid(column=0,row=2)
+    ttk.Button(new, text="Yes",command=Yes).grid(row=2,column=0)
+    ttk.Button(new, text="Cancel",command=No).grid(row=2,column=1)
 
 def resetB():
     for i in range(9):
@@ -202,22 +223,17 @@ def only_numbers(char):
     return re.match('^[1-9]*$', char) is not None and len(char) <= 1
 
 def tick(char):
-    for ch in char:
-        if int(ch) == 0:
-            return False
-        else:
-            break
-    return re.match('^[0-9]*$', char) is not None and len(char) < 7 and len(char) >= 1
+    return re.match('^[0-9]*$', char) is not None and len(char) < 7
 def yess(char):
     for ch in char:
         if int(ch) == 0:
-            return False
+            return True
         else:
             break
     if char == '':
-        return False
+        return True
     else:
-        if re.match('^[0-9]*$', char) is not None and int(char) <= int(len(asols)) and len(char) >= 1:
+        if re.match('^[0-9]*$', char) is not None and int(char) <= int(len(asols)):
             per(char)
             return True
         else:
@@ -236,7 +252,10 @@ def soclose(gimme):
     return res
 
 def per(peram):
-    now = int(HowDisp.get())
+    try:
+        now = int(HowDisp.get())
+    except:
+        now = '1'
     if len(asols) > 0:
         if peram == 'strt':
             HowDisp.set(str(1))
@@ -287,6 +306,7 @@ for i in range (3):
             for l in range(3):
                 x = ttk.Entry(framegrid,width=4,textvariable=board[k + (3*i)][l + (3*j)], validate="key", validatecommand=validation)
                 x.grid(row=int(k+(3*i)+2),column=int(l+(3*j)+2),pady=1,padx=2)
+                user[k + (3*i)].append(x)
 
 for i in range (3):
     for j in range(3):
@@ -298,6 +318,96 @@ for i in range (3):
                 y = ttk.Label(framegrid,text="",width=6)
                 y.grid(row=int(k+(3*i)),column=int(l+(3*j)),pady=3)
                 Answer[k + (3*i)].append(y)
+
+if path.exists(path.join(path.dirname(path.abspath(__file__)), "board.txt")):
+    with open(path.join(path.dirname(path.abspath(__file__)), "board.txt"), 'r') as f:
+        asols.append(f.read())
+        nowsy = soclose(0)
+        for i in range(9):
+            for j in range(9):
+                if nowsy[i][j] == '0':
+                    pass
+                else:
+                    board[i][j].set(nowsy[i][j])
+
+def coords(wid):
+    wid = str(wid)
+    if wid[7] == '.':
+        try:
+            for i in range(3):
+                for j in range(3):
+                    if int(wid[14]) == 3*i + j + 1:
+                        return str(i) + str(j)
+        except:
+            return '00'
+    elif wid[8] == '.':
+        for i in range(3):
+            for j in range(3):
+                if int(wid[7]) == int(3*i + j + 1):
+                    for k in range(3):
+                        for l in range(3):
+                            try:
+                                if int(wid[15]) == 3*k + l + 1:
+                                    return str(k + (3*i)) + str(l + (3*j))
+                            except:
+                                return str(3*i) + str(3*j)
+    else:
+        return ''
+def up(event):
+    widget = root.focus_get()
+    cos = coords(widget)
+    if cos[0] == '0':
+        pass
+    else:
+        user[int(cos[0])-1][int(cos[1])].focus_set()
+def dn(event):
+    widget = root.focus_get()
+    cos = coords(widget)
+    if cos[0] == '8':
+        pass
+    else:
+        user[int(cos[0])+1][int(cos[1])].focus_set()
+def lf(event):
+    widget = root.focus_get()
+    cos = coords(widget)
+    if cos[1] == '0':
+        pass
+    else:
+        user[int(cos[0])][int(cos[1])-1].focus_set()
+def rt(event):
+    widget = root.focus_get()
+    cos = coords(widget)
+    if cos[1] == '8':
+        pass
+    else:
+        user[int(cos[0])][int(cos[1])+1].focus_set()
+def stab(event):
+    widget = root.focus_get()
+    cos = coords(widget)
+    if cos[1] == '0' and cos[0] == '0':
+        user[8][8].focus_set()
+    elif cos[1] == '0':
+        user[int(cos[0])-1][8].focus_set()
+    else:
+        user[int(cos[0])][int(cos[1])-1].focus_set()
+def tab(event):
+    widget = root.focus_get()
+    cos = coords(widget)
+    if cos[1] == '8' and cos[0] == '8':
+        user[0][0].focus_set()
+    elif cos[1] == '8':
+        user[int(cos[0])+1][0].focus_set()
+    else:
+        user[int(cos[0])][int(cos[1])+1].focus_set()
+
+root.bind("<Up>", up)
+root.bind("<Down>", dn)
+root.bind("<Left>", lf)
+root.bind("<Right>", rt)
+root.bind_all("<Tab>", tab)
+root.bind_all("<Shift-Tab>", stab)
+
+user[4][4].focus_set()
 
 img = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "question.png")))
 framegrid = ttk.Frame(master=root)
@@ -315,7 +425,7 @@ val_1.set(' milliseconds')
 framegrid = ttk.Frame(root,width=195,height=72)
 framegrid.grid(row=3,column=4, padx=5, pady=5)
 framegrid.grid_propagate(False)
-ttk.Label(framegrid, text='Time: ').grid(column=4,row=1, sticky=(W))
+ttk.Label(framegrid, text='Action Time: ').grid(column=4,row=1, sticky=(W))
 ttk.Label(framegrid, text='Backtrack Number: ').grid(column=4,row=2, sticky=(W))
 ttk.Label(framegrid, text='Increase Number: ').grid(column=4,row=3, sticky=(W))
 ttk.Label(framegrid, textvariable=val_1).grid(column=5,row=1, sticky=(E))
@@ -339,12 +449,15 @@ img3 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "NEXT1.p
 img4 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "LAST1.png")))
 framegrid = ttk.Frame(root)
 framegrid.grid(column=5,row=6,columnspan=3)
-Button(framegrid, image=img1,command=lambda: per('strt'), highlightthickness = 0, bd = 0).grid(column=5,row=6)
-Button(framegrid, image=img2,command=lambda: per('prv'), highlightthickness = 0, bd = 0).grid(column=6,row=6)
-Button(framegrid, image=img3,command=lambda: per('nxt'), highlightthickness = 0, bd = 0).grid(column=8,row=6)
+Button(framegrid, image=img1,command=lambda: per('strt'), highlightthickness = 0, bd = 0).grid(column=4,row=6,padx=3)
+Button(framegrid, image=img2,command=lambda: per('prv'), highlightthickness = 0, bd = 0).grid(column=5,row=6)
+ttk.Label(framegrid, text="Solution Nº: ").grid(column=6,row=6,padx=3)
+Button(framegrid, image=img3,command=lambda: per('nxt'), highlightthickness = 0, bd = 0).grid(column=8,row=6,padx=3)
 Button(framegrid, image=img4,command=lambda: per('end'), highlightthickness = 0, bd = 0).grid(column=9,row=6)
 validations = (framegrid.register(yess),'%P')
 HowDisp=StringVar()
-HowDisp.set('1')
-ttk.Entry(framegrid,width=20,textvariable=HowDisp, validate="key", validatecommand=validations).grid(row=6,column=7,padx=7)
+HowDisp.set('')
+ttk.Entry(framegrid,width=15,textvariable=HowDisp, validate="key", validatecommand=validations).grid(row=6,column=7)
+
+root.protocol("WM_DELETE_WINDOW", save)
 root.mainloop()
