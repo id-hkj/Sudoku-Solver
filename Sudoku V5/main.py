@@ -39,7 +39,7 @@ def save():
     def No():
         check.destroy()
     def Yes():
-        with open(path.join(path.dirname(path.abspath(__file__)), "board.txt"), 'w') as f:
+        with open(path.join(path.dirname(path.abspath(__file__)), "imgs", "board.txt"), 'w') as f:
             f.write(str(Solveinit(board)))
         root.destroy()
     ttk.Label(framez,text='Are you sure you want to close this program?').grid(row=1,column=0)
@@ -222,11 +222,11 @@ def HowMany(Boards):
 
 def only_numbers(char):
     if (re.match('^[1-9]*$', char) is not None and len(char) <= 1):
-        if not(len(char) == 0):
-            tab(7)
+        #if not(len(char) == 0):
+            #tab(7)
         return True
-    elif char=='0':
-        tab(4)
+    #elif char=='0':
+    #    tab(4)
     else:
         return False
 
@@ -417,7 +417,7 @@ root.bind_all("<Shift-Tab>", stab)
 
 user[4][4].focus_set()
 
-img = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "question.png")))
+img = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "imgs", "question.png")))
 framegrid = ttk.Frame(master=root)
 framegrid.grid(row=2,column=4, padx=20)
 ttk.Button(framegrid, text='Sudoku Solver', command=Solver).grid(column=4,row=1)
@@ -451,10 +451,10 @@ message.grid(column=4,row=3, columnspan=2)
 
 ttk.Button(root, text='Clear', command=resetB).grid(column=1,row=6, sticky=(W,E))
 
-img1 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "FIRST1.png")))
-img2 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "PREV1.png")))
-img3 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "NEXT1.png")))
-img4 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "LAST1.png")))
+img1 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "imgs", "FIRST1.png")))
+img2 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "imgs", "PREV1.png")))
+img3 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "imgs", "NEXT1.png")))
+img4 = PhotoImage(file=(path.join(path.dirname(path.abspath(__file__)), "imgs", "LAST1.png")))
 framegrid = ttk.Frame(root)
 framegrid.grid(column=5,row=6,columnspan=3)
 Button(framegrid, image=img1,command=lambda: per('strt'), highlightthickness = 0, bd = 0).grid(column=4,row=6,padx=3)
